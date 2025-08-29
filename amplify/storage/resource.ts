@@ -1,8 +1,9 @@
 export const storage = defineStorage({
-  name: 'myS3Bucket',
+  name: 'myProjectFiles',
   access: (allow) => ({
-    'public/*': [
-      allow.authenticated.to(['read']),
+    'media/*': [
+      allow.groups(['auditor']).to(['read']),
+      allow.groups(['admin']).to(['read', 'write', 'delete'])
     ]
   })
 });
