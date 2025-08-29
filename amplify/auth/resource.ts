@@ -9,5 +9,5 @@ export const auth = defineAuth({
     email: true,
     
   },
-  groups: ['Admins'],   // 👈 this creates the Admins group in Cognito
+   groups: ['Admins', 'Users'], // 👈 define groups here
 });
