@@ -4,8 +4,7 @@ export const storage = defineStorage({
   name: 'myS3Bucket',
   access: (allow) => ({
     '/*': [
-      allow.guest.to(['read']),
-      allow.authenticated.to(['read']),
+      allow.authenticated.to(['read']),  // only signed-in users can read
     ],
-  })
+  }),
 });
