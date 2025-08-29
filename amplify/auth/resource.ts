@@ -5,5 +5,15 @@ export const auth = defineAuth({
     email: true,
     
   },
-  groups: ['admin', 'auditor']
+  groups: ['admin', 'auditor'],
+    
+  userAttributes: {
+    preferredUsername: {
+      mutable: true,
+      required: false
+    }
+  }
+
 });
+
+
