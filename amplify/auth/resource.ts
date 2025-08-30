@@ -28,7 +28,6 @@ export const auth = defineAuth({
     "custom:display_name": {
       dataType: "String",
       mutable: true,
-      required: false,
       maxLen: 50,
     },
   },
