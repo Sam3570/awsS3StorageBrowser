@@ -8,9 +8,10 @@ export const auth = defineAuth({
     
   userAttributes: {
     preferredUsername: {
+      dataType: 'string',  // ✅ required
       mutable: true,
-      required: false
-    }
+      required: false,
+    },
   },
   groups: ['admin', 'auditor'],
     
