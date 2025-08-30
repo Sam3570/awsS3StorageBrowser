@@ -7,13 +7,6 @@ export const auth = defineAuth({
   },
   groups: ['admin', 'auditor'],
     
-  userAttributes: {
-    preferredUsername: {
-      mutable: false,
-      required: true
-    }
-  }
-
 });
 
 
