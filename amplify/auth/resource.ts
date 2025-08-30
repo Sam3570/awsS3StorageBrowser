@@ -6,12 +6,6 @@ export const auth = defineAuth({
     
   },
     
-userAttributes: {
-    nickname: {
-      mutable: true,
-      required: false,
-    },
-  },
   groups: ['admin', 'auditor'],
     
 });
