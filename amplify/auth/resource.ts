@@ -5,6 +5,15 @@ export const auth = defineAuth({
     email: true,
     
   },
+
+   userAttributes: {
+    preferred_username: {
+      dataType: AuthAttributeDataType.String, // 👈 use enum, not "String"
+      mutable: true,
+      required: false,
+      maxLength: 100,
+    },
+  },
     
   groups: ['admin', 'auditor'],
     
