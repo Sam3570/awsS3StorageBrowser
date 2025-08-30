@@ -7,12 +7,10 @@ export const auth = defineAuth({
   },
     
 userAttributes: {
-    preferredUsername: {
-      dataType: "String",   // 👈 missing in your case
+    nickname: {
       mutable: true,
       required: false,
-      maxLength: 100        // you can choose any reasonable number
-    }
+    },
   },
   groups: ['admin', 'auditor'],
     
