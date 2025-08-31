@@ -37,7 +37,7 @@ export default function App() {
     <Authenticator>
   {({ signOut, user }) => {
     console.log("User object:", user);  // 👈 Add here
-    console.log(fetchUserAttributes())
+    console.log(fetchUserAttributes().name)
     return (
       <main>
         <h1>Hello {user?.username}</h1>
