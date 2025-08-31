@@ -9,6 +9,7 @@ import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from '@aws-amplify/ui-react';
 import { StorageBrowser } from '../components/StorageBrowser';
+import { fetchUserAttributes } from 'aws-amplify/auth';
 
 Amplify.configure(outputs);
 
@@ -25,6 +26,16 @@ export default function App() {
 
   useEffect(() => {
     listTodos();
+    useEffect(() => {
+  listTodos();
+  // 👇 Fetch Cognito attributes here
+  fetchUserAttributes().then(attrs => {
+    console.log("User attributes:", attrs);
+  }).catch(err => {
+    console.error("Error fetching attributes:", err);
+  });
+
+}, []);
   }, []);
 
   function createTodo() {
@@ -35,7 +46,7 @@ export default function App() {
   return (
     <Authenticator>
   {({ signOut, user }) => {
-    console.log("User object:", user.attributes);  // 👈 Add here
+    console.log("User object:", user);  // 👈 Add here
 
     return (
       <main>
