@@ -10,30 +10,33 @@ import { fetchUserAttributes } from "aws-amplify/auth";
 
 Amplify.configure(outputs);
 
-export default function App() {
+function UserInfo({ signOut, user }) {
   const [attributes, setAttributes] = useState<any>(null);
 
+  useEffect(() => {
+    if (user) {
+      fetchUserAttributes().then(res => setAttributes(res));
+    }
+  }, [user]);
+
   return (
-    <Authenticator>
-      {({ signOut, user }) => {
-        useEffect(() => {
-          fetchUserAttributes().then(res => setAttributes(res));
-        }, []);
+    <main>
+      <h1>Hello {attributes?.preferred_username || attributes?.name || user?.username}</h1>
+      <button onClick={signOut}>Sign out</button>
 
-        return (
-          <main>
-            <h1>Hello {attributes?.name}</h1>
-            <button onClick={signOut}>Sign out</button>
-
-            <h2>Your Files</h2>
-            <StorageBrowser />
-          </main>
-        );
-      }}
-    </Authenticator>
+      <h2>Your Files</h2>
+      <StorageBrowser />
+    </main>
   );
 }
 
+export default function App() {
+  return (
+    <Authenticator>
+      {({ signOut, user }) => <UserInfo signOut={signOut} user={user} />}
+    </Authenticator>
+  );
+}
 
 
 
