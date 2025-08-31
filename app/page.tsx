@@ -48,18 +48,20 @@ export default function App() {
 
   return (
     <Authenticator formFields={formFields}>
-      {({ signOut, user }) => (
-        <main>
-            <h1>Hello {user?.username}</h1>
+  {({ signOut, user }) => {
+    console.log("User object:", user);  // 👈 Add here
 
-            <button onClick={signOut}>Sign out</button>
+    return (
+      <main>
+        <h1>Hello {user?.attributes?.preferred_username || user?.username}</h1>
+        <button onClick={signOut}>Sign out</button>
 
-          {/* StorageBrowser Component */}
-          <h2>Your Files</h2>
-          <StorageBrowser />
-
-        </main>
-      )}
-    </Authenticator>
+        {/* StorageBrowser Component */}
+        <h2>Your Files</h2>
+        <StorageBrowser />
+      </main>
+    );
+  }}
+</Authenticator>
   );
 }
