@@ -26,16 +26,6 @@ export default function App() {
 
   useEffect(() => {
     listTodos();
-    useEffect(() => {
-  listTodos();
-  // 👇 Fetch Cognito attributes here
-  fetchUserAttributes().then(attrs => {
-    console.log("User attributes:", attrs);
-  }).catch(err => {
-    console.error("Error fetching attributes:", err);
-  });
-
-}, []);
   }, []);
 
   function createTodo() {
@@ -47,6 +37,11 @@ export default function App() {
     <Authenticator>
   {({ signOut, user }) => {
     console.log("User object:", user);  // 👈 Add here
+    useEffect(() => {
+      fetchUserAttributes()
+        .then(attrs => console.log("User attributes:", attrs))
+        .catch(err => console.error("Error fetching attributes:", err));
+    }, []);
 
     return (
       <main>
