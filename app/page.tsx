@@ -46,7 +46,7 @@ export default function App() {
 
     return (
       <main>
-        <h1>Hello {user?.username}</h1>
+        <h1>Hello {attributes?.preferred_username}</h1>
         <button onClick={signOut}>Sign out</button>
 
         {/* StorageBrowser Component */}
