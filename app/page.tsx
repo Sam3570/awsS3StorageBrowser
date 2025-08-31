@@ -45,11 +45,12 @@ export default function App() {
   },
 };
 
+
   return (
     <Authenticator formFields={formFields}>
       {({ signOut, user }) => (
         <main>
-            <h1>Hello {user?.attributes?.preferred_username}</h1>
+            <h1>Hello {user}</h1>
             <button onClick={signOut}>Sign out</button>
 
           {/* StorageBrowser Component */}
