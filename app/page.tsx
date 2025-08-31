@@ -37,12 +37,7 @@ export default function App() {
     <Authenticator>
   {({ signOut, user }) => {
     console.log("User object:", user);  // 👈 Add here
-    useEffect(() => {
-      fetchUserAttributes()
-        .then(attrs => console.log("User attributes:", attrs))
-        .catch(err => console.error("Error fetching attributes:", err));
-    }, []);
-
+    console.log(fetchUserAttributes())
     return (
       <main>
         <h1>Hello {user?.username}</h1>
