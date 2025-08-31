@@ -36,17 +36,17 @@ export default function App() {
   return (
     <Authenticator>
   {({ signOut, user }) => {
-    let attributes: any = {};
+    const [attributes, setAttributes] = useState(null);
     console.log("User object:", user);  // 👈 Add here
     
     fetchUserAttributes().then(res => {
-      console.log("Fetched attributes:", res);
-      attributes = res;
+      setAttributes(res)
+      console.log(attributes)
     });
 
     return (
       <main>
-        <h1>Hello {attributes.name}</h1>
+        <h1>Hello {attributes?.name}</h1>
         <button onClick={signOut}>Sign out</button>
 
         {/* StorageBrowser Component */}
