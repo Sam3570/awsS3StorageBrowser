@@ -40,13 +40,13 @@ export default function App() {
     console.log("User object:", user);  // 👈 Add here
     
     fetchUserAttributes().then(res => {
-      console.log("Fetched attributes:", res);
+      console.log("Fetched attributes:", res.name);
       attributes = res;
     });
 
     return (
       <main>
-        <h1>Hello {attributes?.preferred_username}</h1>
+        <h1>Hello {attributes}</h1>
         <button onClick={signOut}>Sign out</button>
 
         {/* StorageBrowser Component */}
