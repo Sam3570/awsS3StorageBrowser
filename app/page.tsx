@@ -36,8 +36,14 @@ export default function App() {
   return (
     <Authenticator>
   {({ signOut, user }) => {
+    let attributes: any = {};
     console.log("User object:", user);  // 👈 Add here
-    console.log(fetchUserAttributes().name)
+    
+    fetchUserAttributes().then(res => {
+      console.log("Fetched attributes:", res);
+      attributes = res;
+    });
+
     return (
       <main>
         <h1>Hello {user?.username}</h1>
