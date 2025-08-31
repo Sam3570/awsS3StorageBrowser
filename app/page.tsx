@@ -35,7 +35,7 @@ export default function App() {
   return (
     <Authenticator>
   {({ signOut, user }) => {
-    console.log("User object:", user);  // 👈 Add here
+    console.log("User object:", user.attributes);  // 👈 Add here
 
     return (
       <main>
