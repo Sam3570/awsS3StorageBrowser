@@ -33,8 +33,20 @@ export default function App() {
     });
   }
 
+  const formFields = {
+  signUp: {
+    preferred_username: {
+      // Custom label, placeholder, etc.
+      label: 'Preferred Username',
+      placeholder: 'Choose a display username',
+      isRequired: false,
+      order: 2
+    },
+  },
+};
+
   return (
-    <Authenticator>
+    <Authenticator formFields={formFields}>
       {({ signOut, user }) => (
         <main>
             <h1>Hello {user?.username}</h1>
