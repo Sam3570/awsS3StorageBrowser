@@ -53,7 +53,7 @@ export default function App() {
 
     return (
       <main>
-        <h1>Hello {user?.attributes?.preferred_username || user?.username}</h1>
+        <h1>Hello {user?.username}</h1>
         <button onClick={signOut}>Sign out</button>
 
         {/* StorageBrowser Component */}
