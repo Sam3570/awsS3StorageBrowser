@@ -36,9 +36,7 @@ export default function App() {
   return (
     <Authenticator>
   {({ signOut, user }) => {
-    const [attributes, setAttributes] = useState(null);
-    console.log("User object:", user);  // 👈 Add here
-    
+    const [attributes, setAttributes] = useState(null);    
     fetchUserAttributes().then(res => {
       setAttributes(res)
       console.log(attributes)
