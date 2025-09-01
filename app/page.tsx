@@ -1,60 +1,46 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
-import "./../app/app.css";
-import { Amplify } from "aws-amplify";
+import { useState } from "react";
+import { Amplify, Auth } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
-import "@aws-amplify/ui-react/styles.css";
-import { Authenticator } from '@aws-amplify/ui-react';
-import { StorageBrowser } from '../components/StorageBrowser';
-import { fetchUserAttributes } from 'aws-amplify/auth';
 
+import "@aws-amplify/ui-react/styles.css";
+import { Authenticator } from "@aws-amplify/ui-react";
+import { StorageBrowser } from "../components/StorageBrowser";
+import "./../app/app.css";
+
+// Configure Amplify
 Amplify.configure(outputs);
 
-const client = generateClient<Schema>();
-
 export default function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  function listTodos() {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }
-
-  useEffect(() => {
-    listTodos();
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
-    });
-  }
   return (
     <Authenticator>
-  {({ signOut, user }) => {
-    let attributes: any = {};
-    console.log("User object:", user);  // 👈 Add here
-    
-    fetchUserAttributes().then(res => {
-      console.log("Fetched attributes:", res);
-      attributes = res;
-    });
+      {({ signOut, user }) => <AuthenticatedApp user={user} signOut={signOut} />}
+    </Authenticator>
+  );
+}
 
-    return (
-      <main>
-        <h1>Hello {attributes?.username}</h1>
-        <button onClick={signOut}>Sign out</button>
+function AuthenticatedApp({ user, signOut }: { user: any; signOut: () => void }) {
+  const [attributes, setAttributes] = useState<any>(null);
 
-        {/* StorageBrowser Component */}
+  // Fetch user attributes without useEffect
+  if (!attributes) {
+    Auth.fetchUserAttributes()
+      .then((res) => setAttributes(res))
+      .catch((err) => console.error("Error fetching attributes:", err));
+  }
+
+  const username = attributes?.username || user.username || "User";
+
+  return (
+    <main>
+      <h1>Hello {username}</h1>
+      <button onClick={signOut}>Sign out</button>
+
+      <section>
         <h2>Your Files</h2>
         <StorageBrowser />
-      </main>
-    );
-  }}
-</Authenticator>
+      </section>
+    </main>
   );
 }
