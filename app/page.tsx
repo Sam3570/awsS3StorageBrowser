@@ -46,11 +46,13 @@ export default function App() {
 
     return (
       <main>
-        <h1>Hello0 {user?.signInDetails?.loginId}</h1>
+        <h1>Hello {user?.signInDetails?.loginId}</h1>
         <button onClick={signOut}>Sign out</button>
 
         <h2>Your Files</h2>
+        <div className="storage-wrapper">
         <StorageBrowser />
+        </div>
       </main>
     );
   }}

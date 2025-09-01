@@ -18,7 +18,7 @@ export const storage = defineStorage({
   access: (allow) => ({
     'media/*': [
       allow.groups(['auditor']).to(['read']),          // auditors can only read
-      allow.groups(['admin']).to(['read', 'write']),  // admins can read + write
+      allow.groups(['admin']).to(['read', 'write','delete']),  // admins can read + write
     ],
   }),
 });

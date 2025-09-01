@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));
+    background: whitesmoke;
     display: flex;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     height: 100vh;
@@ -72,13 +72,13 @@ body {
     max-height: 50vh;
     font-size: 0.9em;
   }
-  button {
-    width: 100%;
-    padding: 0.8em;
-  }
 }
 
-.storage-container {
-  overflow-x: auto;
+
+
+.storage-wrapper {
   width: 100%;
+  max-height: 400px;       /* adjust as needed */
+  overflow-x: auto;        /* horizontal scroll for long names */
+  overflow-y: auto;        /* vertical scroll if table too tall */
 }
