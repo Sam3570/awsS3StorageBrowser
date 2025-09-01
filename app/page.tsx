@@ -49,8 +49,11 @@ Amplify.configure(outputs);
 
 export default function App() {
   const [attributes, setAttributes] = useState<any>({});
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
+    if (!user) return; // wait for user to be set
+
     const getAttributes = async () => {
       try {
         const res = await fetchUserAttributes();
@@ -62,16 +65,19 @@ export default function App() {
     };
 
     getAttributes();
-  }, []);
+  }, [user]);
 
   return (
     <Authenticator>
-      {({ signOut, user }) => {
-        console.log("User object:", user);
+      {({ signOut, user: authUser }) => {
+        // Set user in state so top-level useEffect can run
+        useEffect(() => {
+          setUser(authUser);
+        }, [authUser]);
 
         return (
           <main>
-            <h1>Hello {attributes?.name || user?.attributes?.name}</h1>
+            <h1>Hello {attributes?.name || authUser?.attributes?.name}</h1>
             <button onClick={signOut}>Sign out</button>
 
             {/* StorageBrowser Component */}
