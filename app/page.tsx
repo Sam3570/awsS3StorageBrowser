@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -37,17 +36,17 @@ export default function App() {
   return (
     <Authenticator>
   {({ signOut, user }) => {
-    let attributes = {}
+    let attributes: any = {};
     console.log("User object:", user);  // 👈 Add here
     
     fetchUserAttributes().then(res => {
+      console.log("Fetched attributes:", res);
       attributes = res;
-      console.log(attributes)
     });
 
     return (
       <main>
-        <h1>Hello {attributes?.name}</h1>
+        <h1>Hello {attributes?.username}</h1>
         <button onClick={signOut}>Sign out</button>
 
         {/* StorageBrowser Component */}
